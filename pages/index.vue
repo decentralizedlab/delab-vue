@@ -1,6 +1,12 @@
 <template>
   <div class="index">
-    <b-modal v-model="showError" class="modal" :title="$t('Error')">
+    <b-modal
+      v-model="showError"
+      class="modal"
+      :title="$t('Error')"
+      :cancel-title="$t('Don not show again')"
+      @cancel="stopShow"
+    >
       <h3>{{ $t('Ready for Web3?') }}</h3>
       <p>
         {{ $t('It seems you are not browsing in the Web3 Network!') }}
@@ -148,11 +154,14 @@ export default {
         const account = await web3.getAccount()
         this.account = $.addressEllipsis(account)
       } catch (e) {
-        this.showError = true
+        if (!localStorage.getItem('show_wallet_tip')) this.showError = true
         console.error(e)
       } finally {
         this.loading = false
       }
+    },
+    stopShow() {
+      localStorage.setItem('show_wallet_tip', true)
     },
     open(url) {
       window.open(url)
