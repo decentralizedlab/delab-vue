@@ -20,7 +20,9 @@
     </b-modal>
 
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#">DeLab</b-navbar-brand>
+      <b-navbar-brand href="#">
+        <img class="logo" src="/imgs/logo-icon.png" />
+      </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -67,20 +69,21 @@
     </b-navbar>
 
     <div>
-      <b-jumbotron
-        class="text-center"
-        :header="$t('Decentralized Laboratory')"
-        :lead="
-          $t(
-            'DeLab is the first decentralized laboratory and knowledge distribution platform built on Web3'
-          )
-        "
-      >
+      <div class="banner">
+        <img class="logo-lg" src="/imgs/logo.png" alt="" />
+        <h1>{{ $t('Decentralized Laboratory') }}</h1>
+        <p>
+          {{
+            $t(
+              'DeLab is the first decentralized laboratory and knowledge distribution platform built on Web3'
+            )
+          }}
+        </p>
         <p>{{ $t('Our website is currently under construction...') }}</p>
         <b-button variant="dark" href="#" disabled>
           {{ $t('Coming Soon') }}
         </b-button>
-      </b-jumbotron>
+      </div>
     </div>
     <b-container class="section">
       <b-row>
@@ -91,7 +94,7 @@
             img-top
             style="border: none;"
           >
-            <b-card-img-lazy class="banner" center :src="item.img" />
+            <b-card-img-lazy class="section-img" center :src="item.img" />
             <b-card-text>
               {{ item.desc }}
             </b-card-text>
@@ -159,11 +162,27 @@ export default {
 </script>
 <style lang="scss" scoped>
 .index {
-  .banner {
+  .section-img {
     width: 6rem;
   }
   .section {
     padding: 2rem 0;
+  }
+  .logo {
+    width: 2rem;
+  }
+  .banner {
+    padding: 2rem 0;
+    text-align: center;
+    background: #e9ecef;
+    width: 100%;
+    h1 {
+      font-size: 3.5rem;
+      padding: 0.5rem 0;
+    }
+    .logo-lg {
+      height: 6.5rem;
+    }
   }
 }
 .modal {
