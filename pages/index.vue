@@ -3,7 +3,7 @@
     <Navbar nav="home" />
     <div>
       <div class="banner">
-        <img class="logo-lg" src="/imgs/logo.png" alt="" />
+        <img class="logo-lg" src="/imgs/logo2-icon.png" alt="" />
         <h1>{{ $t('Decentralized Laboratory') }}</h1>
         <p>
           {{
@@ -20,7 +20,7 @@
     </div>
     <b-container class="section">
       <b-row>
-        <b-col v-for="(item, index) in list" :key="index">
+        <b-col v-for="(item, index) in list" :key="index" lg="4" md="12">
           <b-card
             class="text-center"
             :title="item.title"
@@ -71,11 +71,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .index {
-  .section-img {
-    width: 6rem;
-  }
   .section {
-    padding: 2rem 0;
+    .section-img {
+      width: 6rem;
+    }
   }
   .banner {
     padding: 2rem 0;

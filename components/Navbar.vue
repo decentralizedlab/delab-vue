@@ -26,7 +26,7 @@
     </b-modal>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#">
-        <img class="logo" src="/imgs/logo-icon.png" />
+        <img class="logo" src="/imgs/logo2.svg" />
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
@@ -37,8 +37,18 @@
           <b-nav-item href="/publish" :active="nav.toLowerCase() === 'publish'">
             {{ $t('Publication') }}
           </b-nav-item>
-          <b-nav-item href="#" disabled>{{ $t('Author') }}</b-nav-item>
-          <b-nav-item href="#" disabled>{{ $t('About') }}</b-nav-item>
+          <b-nav-item href="/author" :active="nav.toLowerCase() === 'author'">
+            {{ $t('Author') }}
+          </b-nav-item>
+          <b-nav-item
+            href="/institution"
+            :active="nav.toLowerCase() === 'institution'"
+          >
+            {{ $t('Institution') }}
+          </b-nav-item>
+          <b-nav-item href="/about" :active="nav.toLowerCase() === 'about'">
+            {{ $t('About') }}
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -122,7 +132,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .logo {
-  width: 2rem;
+  height: 2rem;
 }
 .modal {
   .wallet-list {
