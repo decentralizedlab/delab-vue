@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 export default {
     web3: null,
+    utils: Web3.utils,
     async init() {
         if (this.web3) return this.web3 // already inited
         let provider
@@ -31,6 +32,15 @@ export default {
     async provider() {
         await this.init()
         return this.web3.currentProvider
+    },
+    async balance(address = '') {
+        await this.init()
+        address = address || (await this.getAccount())
+        return await this.web3.eth.getBalance(address)
+    },
+    async chainId() {
+        await this.init()
+        return await this.web3.eth.getChainId()
     },
     // opposite to init
     destroy() {
