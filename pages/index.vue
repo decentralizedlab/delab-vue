@@ -17,7 +17,7 @@
         <b-container class="section">
             <b-row>
                 <b-col v-for="(item, index) in list" :key="index" lg="4" md="12">
-                    <b-card class="text-center" :title="item.title" style="border: none;">
+                    <b-card class="text-center" :title="item.title" style="border: none">
                         <b-card-img-lazy class="section-img" center :src="item.img" />
                         <b-card-text>{{ item.desc }}</b-card-text>
                         <b-button href="#" variant="dark">{{ $t('Learn More') }}</b-button>
@@ -38,20 +38,17 @@ export default {
                 {
                     title: 'Decentralized',
                     img: '/imgs/decentralized.svg',
-                    desc:
-                        'Our vision is to build a decentralized research lab or academy on the Web3 network. To make everyone freely publish intellectual properties on the blockchain.'
+                    desc: 'Our vision is to build a decentralized research lab or academy on the Web3 network. To make everyone freely publish intellectual properties on the blockchain.'
                 },
                 {
                     title: 'Ownable',
                     img: '/imgs/ownable.svg',
-                    desc:
-                        'Protect intellectual property rights with cryptography. You publish research works as NFTs minted on the blockchain. Authors definitely owns the copyright.'
+                    desc: 'Protect intellectual property rights with cryptography. You publish research works as NFTs minted on the blockchain. Authors definitely owns the copyright.'
                 },
                 {
                     title: 'Valuable',
                     img: '/imgs/valuable.svg',
-                    desc:
-                        'All knowledge is valuable, more significant in the value-driven Web3 world. Publications are personal assets, thus the price and trades are decided by authors.'
+                    desc: 'All knowledge is valuable, more significant in the value-driven Web3 world. Publications are personal assets, thus the price and trades are decided by authors.'
                 }
             ]
         }

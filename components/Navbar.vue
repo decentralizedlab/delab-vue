@@ -58,7 +58,7 @@
                                 <span>{{ account }}</span>
                             </div>
                         </template>
-                        <b-dropdown-item disabled href="#">Profile</b-dropdown-item>
+                        <b-dropdown-item href="/profile">Profile</b-dropdown-item>
                         <b-dropdown-item disabled href="#">Sign Out</b-dropdown-item>
                     </b-dropdown>
                     <b-button v-if="loading" size="sm" variant="light" disabled>
@@ -103,10 +103,10 @@ export default {
         async getAccount() {
             try {
                 this.loading = true
+                if (!web3.checkProvider()) return (this.showModalNoneWallet = true)
                 const account = await web3.getAccount()
                 this.account = $.addressEllipsis(account)
             } catch (e) {
-                if (!localStorage.getItem('show_wallet_tip')) this.showError = true
                 console.error(e)
             } finally {
                 this.loading = false
