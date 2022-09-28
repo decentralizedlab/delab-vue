@@ -1,9 +1,9 @@
 <template>
     <div :class="['clip', theme]">
-        <i class="iconfont icon-upload icon"></i>
-        <div v-if="imgUrl !== ''" class="picture">
-            <img :src="imgUrl" />
+        <div v-if="imgUrl" class="picture">
+            <b-img-lazy :src="imgUrl" />
         </div>
+        <i v-else class="iconfont icon-upload icon"></i>
         <input ref="uploadImg" type="file" :accept="accept" @change="getImg($event)" />
         <transition name="opacity">
             <div v-show="showPopup" :class="['popup', { 'clip-popup': autoClip }]">
@@ -79,9 +79,7 @@
 
 <script>
 const extend = (target, source) => {
-    for (const key in source) {
-        target[key] = source[key]
-    }
+    for (const key in source) target[key] = source[key]
     return target
 }
 export default {
@@ -229,6 +227,11 @@ export default {
             return this.accept.split(',').map(x => {
                 return x.split('/')[1]
             })
+        }
+    },
+    watch: {
+        img(v) {
+            this.imgUrl = this.img
         }
     },
     methods: {

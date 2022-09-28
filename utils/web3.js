@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import * as IPFS from 'ipfs-core'
+import { create } from 'ipfs-core'
 
 export default {
     web3: null,
@@ -48,29 +48,29 @@ export default {
         await this.init()
         return await this.web3.eth.getChainId()
     },
+    async contract(abi, addr) {
+        await this.init()
+
+        return new this.web3.eth.Contract(abi, addr[await this.chainId()]).methods
+    },
+    async IPFS() {
+        if (!this.ipfs) this.ipfs = await create()
+        console.log('IPFS', this.ipfs.isOnline())
+        const { agentVersion, id } = await this.ipfs.id()
+        console.log('agentVersion', agentVersion)
+        console.log('id', id)
+    },
     // upload files, text to ipfs
-    async setIpfs(content) {
-        if (!this.ipfs) this.ipfs = await IPFS.create()
+    async setIPFS(content) {
+        await this.IPFS()
+        if (!this.ipfs.isOnline()) throw new Error('IPFS is not online')
         return await this.ipfs.add(content)
     },
-    // get things from ipfs
-    /*
-    async getIpfs(hash) {
-        if (!this.ipfs) this.ipfs = await IPFS.create()
-        for await (const chunk of this.ipfs.cat(hash)) {
-            if (!chunk) continue
-            const filetype = await FileType.fromBuffer(chunk)
-            // return functions can transfer to different strings
-            return {
-                buffer: () => chunk,
-                text: () => Buffer.from(chunk).toString(),
-                json: () => JSON.parse(Buffer.from(chunk).toString()),
-                base64: () => Buffer.from(chunk).toString('base64'),
-                img64: () => `data:${filetype.mime};base64,${Buffer.from(chunk).toString('base64')}`
-            }
-        }
+    async getIPFS(cid) {
+        await this.IPFS()
+        for await (const chunk of this.ipfs.cat(cid)) if (chunk) return chunk
+        // for await (const chunk of this.ipfs.get(cid)) if (chunk) return chunk
     },
-    */
     // opposite to init
     destroy() {
         if (this.web3) {

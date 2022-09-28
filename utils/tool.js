@@ -1,4 +1,6 @@
+import Vue from 'vue'
 export default {
+    vue: new Vue(),
     // ellipsis letters in address
     addressEllipsis(addr, ell = 8) {
         const shortName1 = addr.substring(0, ell)
@@ -20,5 +22,14 @@ export default {
                 resolve(imgResult)
             }
         })
+    },
+    toast(title, content, variant = 'success') {
+        this.vue.$nuxt.$bvToast.toast(content, {
+            variant,
+            title
+        })
+    },
+    decodeUint8(uint8array) {
+        return new TextDecoder('utf-8').decode(uint8array)
     }
 }
